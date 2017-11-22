@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+
+<body>
+    <input type="text" name="name" placeholder="请输入用户名"> <br> <br>
+    <input type="text" name="password" placeholder="请输入密码"> <br> <br>
+    <button type="button" id="reg">注册</button>
+    <button type="button" id="login">登陆</button>
+
+
+    <script>
+        $(function() {
+            $('#reg').click(function() {
+                $.ajax({
+                    url: '/reg',
+                    method: 'get',
+                    data: {
+                        name: $('input[name=name]').val(),
+                        password: $('input[name=password]').val()
+                    },
+                    success: function(res) {
+                        console.log(res)
+                        res = JSON.parse(res)
+                        alert(res.msg)
+                    },
+                    error(err) {
+                        alert('ajax错误')
+                    }
+                })
+            })
+            $('#login').click(function() {
+                $.ajax({
+                    url: '/login',
+                    method: 'get',
+                    data: {
+                        name: $('input[name=name]').val(),
+                        password: $('input[name=password]').val()
+                    },
+                    success: function(res) {
+                        console.log(res)
+                        res = JSON.parse(res)
+                        alert(res.msg)
+                    },
+                    error(err) {
+                        alert('ajax错误')
+                    }
+                })
+            })
+        })
+    </script>
+</body>

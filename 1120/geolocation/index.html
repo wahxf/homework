@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<button id="btn">定位</button>
+
+<body>
+    <script>
+        // getCurrentPosition(success, err, option)
+        // success 
+        window.onload = function() {
+            var btn = document.getElementById('btn')
+            btn.onclick = function() {
+                if (navigator.geolocation) {
+                    var position = navigator.geolocation.getCurrentPosition(function(p) {
+                        alert('地理定位获取成功')
+                        var latitude = p.coords.latitude //维度
+                        var longitude = p.coords.longitude //经度
+                        console.log(latitude, longitude)
+                    }, function(e) {
+                        alert('地理定位获取失败')
+                        console.log('err', e.code, e.message)
+                    })
+                } else {
+                    alert('浏览器不支持地理定位')
+                }
+
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

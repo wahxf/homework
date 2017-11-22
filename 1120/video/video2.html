@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div class="box">
+        <video id="video" src="./movie.ogg" controls>
+            您的浏览器不支持HTML5视频播放
+        </video>
+    </div>
+    <ul>
+        <li> <button onclick="play()">播放</button> </li>
+        <li> <button onclick="pause()">暂停</button> </li>
+        <li> <button onclick="stop()">停止</button> </li>
+        <li> <button onclick="mute()">静音</button> </li>
+        <li> <button onclick="soundIncrement()">音量+</button> </li>
+        <li> <button id="soundDecrement">音量-</button> </li>
+        <li> <button id="speed">1.5倍速</button> </li>
+        <li> <button id="speedDecrement">快退</button> </li>
+    </ul>
+    <script>
+        var videoEle = document.getElementById('video')
+
+        videoEle.ontimeupdate = function() {
+            console.log(videoEle.currentTime)
+        }
+
+        function play() {
+            videoEle.play()
+        }
+
+        function pause() {
+            videoEle.pause()
+        }
+
+        function stop() {
+            videoEle.pause()
+            videoEle.currentTime = 0;
+        }
+
+        function mute() {
+            videoEle.muted = true;
+        }
+
+
+        videoEle.volume = 0
+
+        function soundIncrement() {
+            if (videoEle.volume >= 0 && videoEle.volume < 1) {
+                videoEle.volume += 0.1;
+            }
+        }
+
+        function speed() {
+            if (videoEle.playbackRate) {
+                videoEle.playbackRate = _video.playbackRate * 1.5;
+            } else {
+                alert("对不起，你的浏览器不支持改变播放速度！");
+            }
+        }
+    </script>
+</body>
+
+</html>

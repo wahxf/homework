@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box" style="width:300px;height:300px;background:teal;">
+
+    </div>
+    <script>
+        var box = document.querySelector('#box')
+        box.addEventListener('dragenter', function() {
+            console.log('有文件进入')
+            box.innerHTML = '有文件进来了'
+        })
+        box.addEventListener('dragover', function() {
+            console.log('dragover')
+        })
+        box.addEventListener('dragleave', function() {
+            console.log('离开')
+            box.innerHTML = '离开了'
+        })
+        box.addEventListener('drop', function() {
+            console.log('drop')
+        })
+    </script>
+</body>
+
+</html>

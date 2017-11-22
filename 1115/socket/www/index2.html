@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="http://localhost:9001/socket.io/socket.io.js"></script>
+    <style>
+        .mine {
+            background: teal;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" name="username" placeholder="请输入用户名"> <br> <br>
+    <input type="text" name="password" placeholder="请输入密码"> <br> <br>
+    <button type="button" id="reg">注册</button>
+    <button type="button" id="login">登陆</button>
+    <hr>
+    <textarea name="msg" id="msg" cols="30" rows="10"></textarea>
+    <button type="button" id="sendMsg">发送</button>
+    <ul id="msg-list">
+        <li>
+            <h4></h4>
+            <p></p>
+        </li>
+    </ul>
+    <script>
+        $(function() {
+            var cur_name = ''
+            var server = io.connect('http://localhost:9001')
+            $('#reg').click(function() {
+                var data = {
+                    username: $('input[name=username]').val(),
+                    password: $('input[name=password]').val()
+                }
+                console.log(data)
+                server.emit('reg', data)
+            })
+            $('#login').click(function() {
+                var data = {
+                    username: $('input[name=username]').val(),
+                    password: $('input[name=password]').val()
+                }
+                server.emit('login', data)
+            })
+            $('#sendMsg').click(function() {
+                server.emit('msg', $('#msg').val())
+            })
+
+            server.on('reg_ret', function(data) {
+                alert(data.msg)
+            })
+            server.on('login_ret', function(data) {
+                alert(data.msg)
+                if (data.code == 0) {
+                    cur_name = $('input[name=username]').val()
+                }
+            })
+            server.on('msg_ret', function(data) {
+                console.log(data)
+                if (data.code) {
+                    alert(data.msg)
+                } else {
+                    $('#msg-list').append('<li class="mine"><h4>' + cur_name + '</h4><p>' + $('#msg').val() + '</p></li>')
+                }
+            })
+            server.on('msg', function(name, text) {
+                console.log(name, text)
+                $('#msg-list').append('<li><h4>' + name + '</h4><p>' + text + '</p></li>')
+            })
+        })
+    </script>
+</body>

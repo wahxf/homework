@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+         muted 静音
+     -->
+
+    <video autoplay controls width="100%" height="300" loop preload muted> 
+        <source src="./movie.ogg" type="mp4" codecs="mp4v.20.8, mp4a.40.2"/>
+    </video>
+    <script>
+        window.onload = function() {
+            var video = document.createElement('video')
+            console.log('是否支持MP4', video.canPlayType('video/mp4'))
+
+        }
+    </script>
+</body>
+
+</html>
