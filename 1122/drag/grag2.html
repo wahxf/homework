@@ -9,25 +9,55 @@
 </head>
 
 <body>
-    <div id="box" style="width:300px;height:300px;background:teal;">
-
+    <h4 id="progress"></h4>
+    <div id="box" style="width:100%;height:300px;background:teal;">
     </div>
     <script>
-        var box = document.querySelector('#box')
-        box.addEventListener('dragenter', function() {
-            console.log('有文件进入')
-            box.innerHTML = '有文件进来了'
-        })
-        box.addEventListener('dragover', function() {
-            console.log('dragover')
-        })
-        box.addEventListener('dragleave', function() {
-            console.log('离开')
-            box.innerHTML = '离开了'
-        })
-        box.addEventListener('drop', function() {
-            // console.log('drop')
-        })
+        window.onload = function() {
+            var box = document.querySelector('#box')
+            var progress = document.querySelector('#progress')
+            box.addEventListener('dragenter', function() {
+                box.innerHTML = '有文件进来了'
+            }, false)
+            box.addEventListener('dragover', function(ev) {
+                ev.preventDefault()
+                    // alert('dragover')
+            }, false)
+            box.addEventListener('dragleave', function(ev) {
+                    box.innerHTML = '离开了'
+                }, false)
+                // drop事件，拖拽元素被放置到了目标元素会触发
+            box.addEventListener('drop', function(e) {
+                console.log('drop')
+                e.preventDefault();
+                var file = e.dataTransfer.files[0];
+                // 判断文件类型
+                if (!/image/ig.test(file.type)) {
+                    alert('不是图片')
+                    return;
+                }
+                var reader = new FileReader()
+                reader.onload = function() {
+                    console.log('loaded', this.result)
+                }
+                reader.onprogress = function(ev) {
+                    console.log('progress', ev)
+                    if (e.lengthComputable) {
+                        progress.innerHTML = e.loaded / e.total
+                    }
+                }
+                reader.onerror = function() {
+                        console.log('error')
+                    }
+                    // readAsText 
+                    // readAsDataUrl
+                    // readAsArrayBuffer
+                    // readAsBinaryString
+                reader.readAsDataURL(file)
+
+
+            }, false)
+        }
     </script>
 </body>
 

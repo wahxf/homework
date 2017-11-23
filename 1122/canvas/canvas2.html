@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body style="background:#000; text-align: center;">
+    <canvas id="canvas" width="600" height="600" style="margin:0 auto;background:#fff;"></canvas>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('canvas')
+            var cx = canvas.getContext('2d')
+            var preX = 0,
+                preY = 0;
+
+            function down(e) {
+                preX = e.offsetX
+                preY = e.offsetY
+                canvas.addEventListener('mousemove', move)
+            }
+
+            function move(e) {
+                cx.beginPath()
+                cx.moveTo(preX, preY)
+                cx.lineTo(e.offsetX, e.offsetY)
+                cx.stroke()
+                preX = e.offsetX
+                preY = e.offsetY
+                cx.closePath()
+                canvas.addEventListener('mouseup', function(e) {
+                    canvas.removeEventListener('mousemove', move)
+                })
+            }
+            canvas.addEventListener('mousedown', down)
+
+        }
+    </script>
+</body>
+
+</html>
