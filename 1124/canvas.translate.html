@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body style="background:#000; text-align: center;">
+    <canvas id="canvas" width="600" height="600" style="margin:0 auto;background:#fff;"></canvas>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('canvas')
+            var cx = canvas.getContext('2d')
+            cx.fillStyle = 'tan'
+            cx.save();
+            cx.translate(25, 25)
+            cx.rotate(Math.PI/6)
+            cx.fillStyle = 'pink'
+            cx.fillRect(, 0, 250, 100)
+            cx.restore()
+        }
+    </script>
+</body>
+
+</html>

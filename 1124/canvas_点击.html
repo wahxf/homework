@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{background: #000; text-align: center}
+        canvas{background:#fff; margin:0 auto;}
+    </style>
+</head>
+<body>
+    <canvas height="500" width="500" id="canvas"></canvas>
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById('canvas')
+            var gd = canvas.getContext('2d');
+            var position = {
+                left: 100,
+                top: 100,
+                width: 100,
+                height: 100
+            }
+            gd.strokeRect(position.left, position.top, position.width, position.height)
+            canvas.onclick = function (e) {
+                gd.clearRect(0, 0, position.width, position.height)
+                if (e.offsetX > position.left 
+                    && e.offsetX < position.left + position.width
+                    && e.offsetX > position.top
+                    && e.offsetX < position.top + position.height
+                ) {
+                    gd.strokeStyle="red"
+                    gd.strokeRect(position.left, position.top, position.width, position.height)
+                } else {
+                    gd.strokeStyle="#000"
+                    gd.strokeRect(position.left, position.top, position.width, position.height)
+                }
+            }
+
+
+
+            
+        }
+    </script>
+</body>
+</html>

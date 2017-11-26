@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{background:teal;}
+        canvas{background:#fff}
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="canvas"></canvas>
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById('canvas')
+            var cx = canvas.getContext('2d')
+            var img = new Image()
+            img.src = './m.png'
+            // 下 左 右 上
+
+            var w = 41
+            var h = 62
+            var dir = 'down'
+            var imgDirs = {down: 0, left: 1, right:2, top: 3}
+
+            document.onkeydown = function (e) {
+                var dirs = {38:'top', 40: 'bottom', 37:'left', 39: 'right' }
+                dir = dirs[e.keyCode] || dir
+            }
+
+            img.onload = function () {
+                var n = 0;
+                
+                setInterval(function(){
+                    var moveDir = imgDirs[dir] || 0
+                    n = n == 4 ? 1 : n
+                    cx.clearRect(0, 0, 800, 600)
+                    cx.drawImage(img, w*n, moveDir * h, 41 , 63, 100, 100, 41, 63)
+                    n++
+                    // if (n == 4) {
+                    //     n = 1
+                    // }
+                }, 300)
+            }
+            
+        }
+
+        
+    </script>
+</body>
+</html>

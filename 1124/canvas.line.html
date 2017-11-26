@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="background: teal;">
+    <canvas id="canvas" width="800" height="500">
+        您的浏览器不支持canvas,请升级版本
+    </canvas>
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById('canvas')
+            canvas.style.backgroundColor = '#fff'
+            var cx = canvas.getContext('2d')
+
+            cx.moveTo(100, 100)
+            cx.lineTo(200, 200)
+            cx.lineTo(100, 300)
+            cx.stroke()
+
+            // cx.beginPath()
+            cx.moveTo(300, 100)
+            cx.lineTo(400, 200)
+            cx.lineTo(300, 300)
+            cx.strokeStyle = 'tan'
+            cx.stroke()
+
+            // cx.beginPath()
+            cx.moveTo(500, 100)
+            cx.lineTo(600, 200)
+            cx.lineTo(500, 300)
+            cx.strokeStyle = 'green'
+            cx.stroke()
+        }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{background: #000; text-align: center}
+        canvas{background:#fff; margin:0 auto;}
+    </style>
+</head>
+<body>
+    <canvas height="500" width="500" id="canvas"></canvas>
+    <script>
+        window.onload = function () {
+            var gd = document.getElementById('canvas').getContext('2d');
+            var left = 50
+
+            setInterval(function () {
+                gd.clearRect(0, 0, 500, 500)
+                left += 5
+                gd.strokeRect(left, 50, 100, 50)
+
+            },16)
+        }
+    </script>
+</body>
+</html>

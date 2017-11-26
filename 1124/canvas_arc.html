@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圆形检测</title>
+    <style>
+        body{background: #000; text-align: center}
+        canvas{background:#fff; margin:0 auto;}
+    </style>
+</head>
+<body>
+    <canvas height="500" width="500" id="canvas"></canvas>
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById('canvas')
+            var gd = canvas.getContext('2d');
+            var position = {
+                x: 100,
+                y: 100,
+                r: 100,
+                start: 0,
+                end: 2*Math.PI
+            }
+            gd.arc(position.x, position.y, position.r, position.start, position.end)
+            gd.fillStyle="gray"
+            gd.fill()
+            canvas.onclick = function (e) {
+               gd.beginPath()
+               gd.arc(position.x, position.y, position.r, position.start, position.end)
+                var x = e.offsetX - position.x
+                var y = e.offsetY - position.y
+                var d = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
+                if (d < position.r) {
+                    gd.fillStyle="pink"
+                } else {
+                    gd.fillStyle="gray"
+                }
+                gd.fill()
+            }
+
+
+
+            
+        }
+    </script>
+</body>
+</html>
