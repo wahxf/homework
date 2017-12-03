@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var ws = new WebSocket('ws://localhost:8080')    
+        ws.onopen = function () {
+            console.log('建立websocket连接')
+            ws.send('hello')
+        }
+        ws.onmessage = function () {
+            console.log('有消息')
+        }
+        ws.onerror = function () {
+            console.log('websocket连接失败')
+        }
+        ws.onclose = function () {
+            console.log('websocket连接关闭')
+        }
+    </script>
+</body>
+</html>

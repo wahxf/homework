@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+        }
+        .box1{position: absolute;top:10px; left:10px;background:teal;}
+        .box2{position: absolute;top:200px; left:10px; background: pink;}
+        .box3{position: absolute;top:100px; left:200px; background: tan;}
+    </style>
+</head>
+<body style="height: 3000px">
+    <div class="box box1"></div>
+    <div class="box box2"></div>
+    <div class="box box3"></div>
+    <script>
+        window.onload = function () {
+            var boxs = document.querySelectorAll('.box')
+            Array.from(boxs).forEach(element => {
+                // console.log(element)
+                element.addEventListener('touchstart', function (e) {
+                    // console.log(e, this)
+                    // e.preventDefault();
+
+                    let disX = e.targetTouches[0].pageX - this.offsetLeft
+                    let disY = e.targetTouches[0].pageY - this.offsetTop
+                    let id = e.targetTouches[0].identifier
+
+                    element.addEventListener('touchmove', fnMove, false)
+                    element.addEventListener('touchend', fnEnd, false)
+
+                    function fnMove (e) {
+                        e.preventDefault();
+
+                        
+                        // console.log('move', this, e.targetTouches[0].pageX, disX)
+                        this.style.left  = e.targetTouches[0].pageX - disX + 'px'
+                        this.style.top = e.targetTouches[0].pageY - disY + 'px'
+
+                    }
+
+                    function fnEnd (e) {
+                        console.log(e)
+
+                        // 判断是哪一个手指touchend
+                        let isEnd = false
+                        Array.from(e.changedTouches).forEach(touch => {
+                            if(touch.identifier == id) {
+                                isEnd = true
+                            }
+                        });
+                        if (isEnd) {
+                            element.removeEventListener('touchmove', fnMove, false)
+                            element.removeEventListener('touchend', fnEnd, false)
+                        }
+                    }
+
+                }, false)
+
+
+            });
+        }
+    </script>
+</body>
+</html>
